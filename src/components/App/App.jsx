@@ -1,28 +1,28 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import Searchbar from 'components/Searchbar/Searchbar';
 import { Container } from './App.styled';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
 import PropTypes from 'prop-types';
 
-class App extends Component {
-  state = {
-    searchValue: '',
+const App =() => {
+  
+  const [searchValue, setSearchValue] = useState('');
+
+
+  const creatSerchText = value => {
+    setSearchValue(value);
   };
 
-  creatSerchText = value => {
-    this.setState({ searchValue: value });
-  };
-
-  render() {
+  
     return (
       <Container>
-        <Searchbar handleSerch={this.creatSerchText} />
-        <ImageGallery image={this.state.searchValue} />
+        <Searchbar handleSerch={creatSerchText} />
+        <ImageGallery image={searchValue} />
         <ToastContainer theme="colored" />
       </Container>
     );
-  }
+  
 }
 
 App.propTypes = {
