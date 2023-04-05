@@ -21,7 +21,6 @@ const ImageGallery = ({ seachImage }) => {
       setCurrentImage(seachImage);
       setCurrentArray([]);
       setPage(1);
-
       return;
     }
 

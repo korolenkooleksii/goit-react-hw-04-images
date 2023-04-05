@@ -21,10 +21,7 @@ const Modal = ({ onClose, children }) => {
   }, [onClose]);
 
   const handleBackDropClicl = e => {
-    if (e.target === e.currentTarget) {
-      console.log('Кликнули на backdrop');
-      onClose();
-    }
+    if (e.target === e.currentTarget) onClose();
   };
 
   return createPortal(
