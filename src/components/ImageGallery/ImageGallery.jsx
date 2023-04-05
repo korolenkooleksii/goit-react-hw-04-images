@@ -64,7 +64,6 @@ const ImageGallery = ({ seachImage }) => {
     };
 
     fetchImagesWithQuery();
-    console.log('лог внутри эффекта' + Date.now() );
   }, [currentImage, page, seachImage]);
 
   const updatePage = () => {
@@ -88,7 +87,6 @@ const ImageGallery = ({ seachImage }) => {
       {disabled && <Button nextPage={updatePage} />}
     </>
   );
-  
 };
 
 ImageGallery.propTypes = {
