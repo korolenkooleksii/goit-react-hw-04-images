@@ -16,19 +16,19 @@ const ImageGallery = ({ seachImage }) => {
   const [currentImage, setCurrentImage] = useState('');
 
   useEffect(() => {
-    if (currentImage !== seachImage && currentImage !== '') {
+    if (!seachImage) {
+      return;
+    }
+
+    if (seachImage && !currentImage) {
+      setCurrentImage(seachImage);
+      return;
+    }
+
+    if (currentImage !== seachImage && currentImage) {
       setCurrentImage(seachImage);
       setCurrentArray([]);
       setPage(1);
-      return;
-    }
-
-    if (currentImage !== seachImage && currentImage === '') {
-      setCurrentImage(seachImage);
-      return;
-    }
-
-    if (currentImage === '') {
       return;
     }
 
@@ -39,7 +39,6 @@ const ImageGallery = ({ seachImage }) => {
         const imagesArrey = await fetchImages(page, currentImage);
 
         if (imagesArrey.length === 0) {
-          console.log(555 + Date.now());
           toast.info('There are no images for your request.');
           setIsLoading(false);
           setDisadled(false);
