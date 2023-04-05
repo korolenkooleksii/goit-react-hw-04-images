@@ -1,32 +1,26 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { ItemImage, ImageWeb, ImageLarge } from './ImageGalleryItem.styled';
 import Modal from 'components/Modal/Modal';
 import PropTypes from 'prop-types';
-class ImageGalleryItem extends Component {
-  state = {
-    isShowModal: false,
+
+const ImageGalleryItem = ({ webURL, largeURL, tags }) => {
+  const [isShowModal, setIsShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setIsShowModal(prevState => !prevState);
   };
 
-  toggleModal = () => {
-    this.setState(({ isShowModal }) => ({
-      isShowModal: !isShowModal,
-    }));
-  };
-
-  render() {
-    const { webURL, largeURL, tags } = this.props;
-    return (
-      <ItemImage>
-        <ImageWeb src={webURL} alt={tags} onClick={this.toggleModal} />
-        {this.state.isShowModal && (
-          <Modal onClose={this.toggleModal}>
-            <ImageLarge src={largeURL} alt={tags} />
-          </Modal>
-        )}
-      </ItemImage>
-    );
-  }
-}
+  return (
+    <ItemImage>
+      <ImageWeb src={webURL} alt={tags} onClick={toggleModal} />
+      {isShowModal && (
+        <Modal onClose={toggleModal}>
+          <ImageLarge src={largeURL} alt={tags} />
+        </Modal>
+      )}
+    </ItemImage>
+  );
+};
 
 ImageGalleryItem.propTypes = {
   webURL: PropTypes.string,

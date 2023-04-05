@@ -11,10 +11,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import PropTypes from 'prop-types';
 
 const Searchbar = ({ handleSerch }) => {
-  const [value, satValue] = useState('');
+  const [value, setValue] = useState('');
 
   const handleChange = e => {
-    satValue(e.target.value);
+    setValue(e.target.value);
   };
 
   const handleSubmit = e => {
@@ -26,7 +26,7 @@ const Searchbar = ({ handleSerch }) => {
     }
 
     handleSerch(value.toLowerCase().trim());
-    satValue('');
+    setValue('');
   };
 
 
