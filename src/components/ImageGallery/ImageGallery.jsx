@@ -39,11 +39,10 @@ const ImageGallery = ({ seachImage }) => {
         const imagesArrey = await fetchImages(page, currentImage);
 
         if (imagesArrey.length === 0) {
+          console.log(555 + Date.now());
           toast.info('There are no images for your request.');
-          setCurrentArray([]);
-          setPage(1);
           setIsLoading(false);
-          setCurrentImage('');
+          setDisadled(false);
           return;
         }
 
