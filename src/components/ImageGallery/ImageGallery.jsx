@@ -43,6 +43,7 @@ const ImageGallery = ({ seachImage }) => {
           setCurrentArray([]);
           setPage(1);
           setIsLoading(false);
+          setCurrentImage('');
           return;
         }
 
@@ -63,6 +64,7 @@ const ImageGallery = ({ seachImage }) => {
     };
 
     fetchImagesWithQuery();
+    console.log('лог внутри эффекта' + Date.now() );
   }, [currentImage, page, seachImage]);
 
   const updatePage = () => {
