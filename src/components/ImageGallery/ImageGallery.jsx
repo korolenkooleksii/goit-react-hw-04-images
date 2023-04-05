@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 const ImageGallery = ({ seachImage }) => {
   const [currentArray, setCurrentArray] = useState([]);
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [disabled, setDisadled] = useState(false);
   const [currentImage, setCurrentImage] = useState('');
@@ -36,7 +35,6 @@ const ImageGallery = ({ seachImage }) => {
     const fetchImagesWithQuery = async () => {
       try {
         setIsLoading(true);
-        setError(false);
 
         const imagesArrey = await fetchImages(page, currentImage);
 
@@ -45,7 +43,6 @@ const ImageGallery = ({ seachImage }) => {
           setCurrentArray([]);
           setPage(1);
           setIsLoading(false);
-          setError(false);
           return;
         }
 
@@ -57,9 +54,11 @@ const ImageGallery = ({ seachImage }) => {
       } catch (error) {
         setCurrentArray([]);
         setPage(1);
-        setError(true);
         setIsLoading(false);
-        setError(false);
+        setDisadled(false);
+        toast.error(
+          `${error.message}. Image loading error. Restart the application.`
+        );
       }
     };
 
@@ -85,9 +84,9 @@ const ImageGallery = ({ seachImage }) => {
       </Gallery>
       {isLoading && <Loader />}
       {disabled && <Button nextPage={updatePage} />}
-      {error && toast.error('Image loading error. Restart the application.')}
     </>
   );
+  
 };
 
 ImageGallery.propTypes = {
