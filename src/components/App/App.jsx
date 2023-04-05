@@ -18,7 +18,7 @@ const App =() => {
     return (
       <Container>
         <Searchbar handleSerch={creatSerchText} />
-        <ImageGallery image={searchValue} />
+        <ImageGallery seachImage={searchValue} />
         <ToastContainer theme="colored" />
       </Container>
     );
