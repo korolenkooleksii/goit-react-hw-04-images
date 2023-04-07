@@ -38,7 +38,7 @@ const ImageGallery = ({ seachImage }) => {
 
         const imagesArrey = await fetchImages(page, currentImage);
 
-        if (imagesArrey.length === 0) {
+        if (!imagesArrey.length) {
           toast.info('There are no images for your request.');
           setIsLoading(false);
           setDisadled(false);
