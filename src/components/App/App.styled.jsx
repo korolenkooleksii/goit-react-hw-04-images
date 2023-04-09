@@ -7,3 +7,5 @@ export const Container = styled.div`
   padding-bottom: 24px;
   /* justify-content: center; */
 `;
+
+export const ImageLarge = styled.img``;

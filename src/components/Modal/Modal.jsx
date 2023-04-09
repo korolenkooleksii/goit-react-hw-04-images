@@ -1,31 +1,37 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { BackDrop, Content } from './Modal.styled';
+
 import PropTypes from 'prop-types';
+
+import { BackDrop, Content } from './Modal.styled';
 
 const modalRoot = document.getElementById('modal-root');
 
-const Modal = ({ onClose, children }) => {
-  useEffect(() => {
-    const handleKeyDown = e => {
+export const Modal = ({ onClose, children }) => {
+  
+  const handleKeyDown = useCallback(
+    e => {
       if (e.code === 'Escape') {
         onClose();
       }
-    };
+    },
+    [onClose]
+  );
 
+  useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose]);
+  }, [handleKeyDown]);
 
-  const handleBackDropClicl = e => {
+  const handleBackDropClick = e => {
     if (e.target === e.currentTarget) onClose();
   };
 
   return createPortal(
-    <BackDrop onClick={handleBackDropClicl}>
+    <BackDrop onClick={handleBackDropClick}>
       <Content>{children}</Content>
     </BackDrop>,
     modalRoot
@@ -33,8 +39,6 @@ const Modal = ({ onClose, children }) => {
 };
 
 Modal.propTypes = {
+  children: PropTypes.node.isRequired,
   onClose: PropTypes.func,
-  children: PropTypes.element,
 };
-
-export default Modal;

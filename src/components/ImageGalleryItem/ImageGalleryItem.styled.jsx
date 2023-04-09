@@ -18,4 +18,4 @@ export const ImageWeb = styled.img`
   }
 `;
 
-export const ImageLarge = styled.img``;
+

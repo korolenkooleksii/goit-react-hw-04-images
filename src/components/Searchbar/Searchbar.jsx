@@ -1,20 +1,22 @@
 import { useState } from 'react';
+
+import PropTypes from 'prop-types';
+
 import {
   Header,
   SearchForm,
   SearchButton,
   SearchInput,
-} from './Searchbar.styled';
+} from './SearchBar.styled';
 import { BsSearch } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PropTypes from 'prop-types';
 
-const Searchbar = ({ handleSerch }) => {
+export const SearchBar = ({ handleFormSubmit }) => {
   const [value, setValue] = useState('');
 
-  const handleChange = e => {
-    setValue(e.target.value);
+  const handleChange = ({ target: { value } }) => {
+    setValue(value);
   };
 
   const handleSubmit = e => {
@@ -24,11 +26,10 @@ const Searchbar = ({ handleSerch }) => {
       toast.error('Enter a keyword to search for a picture.');
       return;
     }
-
-    handleSerch(value.toLowerCase().trim());
+    
+    handleFormSubmit(value.toLowerCase().trim());
     setValue('');
   };
-
 
   return (
     <Header>
@@ -38,7 +39,8 @@ const Searchbar = ({ handleSerch }) => {
         </SearchButton>
         <SearchInput
           type="text"
-          autocomplete="off"
+          autoComplete="off"
+          autoFocus
           placeholder="Search images and photos"
           value={value}
           onChange={handleChange}
@@ -48,8 +50,6 @@ const Searchbar = ({ handleSerch }) => {
   );
 };
 
-Searchbar.propTypes = {
-  handleSerch: PropTypes.func,
+SearchBar.propTypes = {
+  handleFormSubmit: PropTypes.func.isRequired,
 };
-
-export default Searchbar;

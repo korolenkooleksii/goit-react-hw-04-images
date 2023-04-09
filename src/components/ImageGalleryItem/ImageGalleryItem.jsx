@@ -1,31 +1,24 @@
-import { useState } from 'react';
-import { ItemImage, ImageWeb, ImageLarge } from './ImageGalleryItem.styled';
-import Modal from 'components/Modal/Modal';
 import PropTypes from 'prop-types';
 
-const ImageGalleryItem = ({ webURL, largeURL, tags }) => {
-  const [isShowModal, setIsShowModal] = useState(false);
+import { ItemImage, ImageWeb } from './ImageGalleryItem.styled';
 
-  const toggleModal = () => {
-    setIsShowModal(prevState => !prevState);
-  };
-
+export const ImageGalleryItem = ({ webURL, largeURL, tags, onImageClick }) => {
   return (
     <ItemImage>
-      <ImageWeb src={webURL} alt={tags} onClick={toggleModal} />
-      {isShowModal && (
-        <Modal onClose={toggleModal}>
-          <ImageLarge src={largeURL} alt={tags} />
-        </Modal>
-      )}
+      <ImageWeb
+        src={webURL}
+        alt={tags}
+        onClick={() => {
+          onImageClick(largeURL);
+        }}
+      />
     </ItemImage>
   );
 };
 
 ImageGalleryItem.propTypes = {
-  webURL: PropTypes.string,
-  largeURL: PropTypes.string,
-  tags: PropTypes.string,
+  webURL: PropTypes.string.isRequired,
+  largeURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  onImageClick: PropTypes.func.isRequired,
 };
-
-export default ImageGalleryItem;
