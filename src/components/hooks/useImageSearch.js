@@ -17,6 +17,7 @@ export const useImageSearch = () => {
 
     const fetchImagesWithQuery = async () => {
       setIsLoading(true);
+      setDisabled(false);
       try {
         const { hits, totalHits } = await getImages(page, query);
 
@@ -33,6 +34,7 @@ export const useImageSearch = () => {
         toast.error(
           `${error.message}. Image loading error. Restart the application.`
         );
+        setIsLoading(false);
       }
     };
 

@@ -19,7 +19,6 @@ export const ImageGallery = ({ images = [], onImageClick }) => {
           ))}
         </Gallery>
       )}
-      ()
     </>
   );
 };
